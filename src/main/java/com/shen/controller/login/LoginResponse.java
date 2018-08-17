@@ -1,15 +1,15 @@
 package com.shen.controller.login;
 
 import java.io.Serializable;
-import java.security.Principal;
+import java.util.List;
 
 public class LoginResponse implements Serializable {
 
 	private static final long serialVersionUID = -614082653304214886L;
 
 	private StatusCode statusCode;
-
-	private Principal body;
+	
+	private List<String> entitlements;
 
 	public StatusCode getStatusCode() {
 		return statusCode;
@@ -19,12 +19,12 @@ public class LoginResponse implements Serializable {
 		this.statusCode = statusCode;
 	}
 
-	public Principal getBody() {
-		return body;
+	public List<String> getEntitlements() {
+		return entitlements;
 	}
 
-	public void setBody(Principal body) {
-		this.body = body;
+	public void setEntitlements(List<String> entitlements) {
+		this.entitlements = entitlements;
 	}
 
 }

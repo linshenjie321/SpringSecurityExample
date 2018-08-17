@@ -1,11 +1,53 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
     <head>
         <title>Spring Security Example</title>
+        <!-- Compiled and minified CSS -->
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    	<link rel="stylesheet" th:href="@{/css/main.css}">
+    	<!-- Compiled and minified JavaScript -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
-        <h1>Welcome!</h1>
-
-        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+        <div class="container">
+        	<nav>
+			    <div class="nav-wrapper">
+			      <ul id="nav-mobile" class="left hide-on-med-and-down">
+			        <li sec:authorize="hasAuthority('HOMETAB')"><a href="#">Home</a></li>
+			        <li sec:authorize="hasAuthority('SUPPORTTAB')"><a href="#">Support</a></li>
+			        <li sec:authorize="hasAuthority('PAYMENTCENTERTAB')"><a href="#">Payment Center</a></li>
+			        <li sec:authorize="hasAuthority('PAYMENTHIGHWAYTAB')"><a href="#">Payment Highway</a></li>
+			        <li sec:authorize="hasAuthority('PRODUCTCATALOGUETAB')"><a href="#">Product Catalogue</a></li>
+			        <li sec:authorize="hasAuthority('CONTENTMANAGEMENTTAB')"><a href="#">Content Management</a></li>
+			        <li sec:authorize="hasAuthority('SCOADMINTAB')"><a href="#">Sco Admin</a></li>
+			        <li sec:authorize="hasAnyAuthority('SCOADMINTAB', 'HOMETAB')"><a href="#">Special Tab</a></li>
+			        <a class="brand-logo right" th:href="@{/logout}">Sign Out</a>
+			      </ul>
+			    </div>
+			</nav>
+			<span sec:authorize="isAuthenticated()">
+				<table>
+				  <tr>
+				    <th>Name</th>
+				    <th>Data</th>
+				  </tr>
+				  <tr>
+				    <td>Logged user</td>
+				    <td><span sec:authentication="name"></span></td>
+				  </tr>
+				  <tr>
+				    <td>Authorities</td>
+				    <td><span sec:authentication="authorities"></td>
+				  </tr>
+				</table>
+                
+            </span>
+      	</div>
+      	<script>
+	      	$( document ).ready(function() {
+	      	    console.log( "ready!" );
+	      	});
+      	</script>
     </body>
 </html>
